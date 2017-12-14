@@ -34,6 +34,7 @@ gem 'devise'
 # gem 'capistrano-rails', group: :development
 
 gem 'carrierwave'
+gem 'ffaker'
 
 
 group :development, :test do
