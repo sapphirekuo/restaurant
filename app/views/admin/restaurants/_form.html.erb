@@ -1,33 +1,52 @@
-<% if @restaurant.errors.any? %>
-  <h2>We have some errors here !</h2>
-  <ul>
-    <% @restaurant.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
+<div class="container">
+  <div class="row">
+
+    <% if @restaurant.errors.any? %>
+      <h4>We have some errors here !</h4>
+      <ul>
+        <% @restaurant.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+      <hr>
     <% end %>
-  </ul>
-<% end %>
 
 
 
 <%= form_for  [:admin, @restaurant] do |f| %>
-  <%= f.label :name, "Name" %>
-  <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :name, "Name" %>
+    <%= f.text_field :name %>
+  </div>
 
-  <%= f.label :tel, "Tel" %>
-  <%= f.text_field :tel %>
+  <div class="form-group">
+    <%= f.label :tel, "Tel" %>
+    <%= f.text_field :tel %>
+  </div>
 
-  <%= f.label :address, "Address" %>
-  <%= f.text_field :address %>
+  <div class="form-group">
+    <%= f.label :address, "Address" %>
+    <%= f.text_field :address %>
+  </div>
 
-  <%= f.label :opening_hours, "Opening Hours" %>
-  <%= f.text_field :opening_hours %>
+  <div class="form-group">
+    <%= f.label :opening_hours, "Opening Hours" %>
+    <%= f.text_field :opening_hours %>
+  </div>
 
-  <%= f.label :description, "Description" %>
-  <%= f.text_area :description %>
+  <div class="form-group">
+    <%= f.label :description, "Description" %>
+    <%= f.text_area :description %>
+  </div>
 
-  <%= f.label :image, "Photo" %>
-  <%= image_tag @restaurant.image, width: '300px' if @restaurant.image? %>
-  <%= f.file_field :image%>
+  <div class="form-group">
+    <%= f.label :image, "Photo" %>
+    <%= image_tag @restaurant.image, width: '300px' if @restaurant.image? %>
+    <%= f.file_field :image%>
+  </div>
 
-  <%= f.submit %>
+  <div class="form-group">
+    <%= f.submit %>
+  </div>
+
 <% end %>
