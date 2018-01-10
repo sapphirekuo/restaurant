@@ -5,6 +5,18 @@
     <%= link_to 'Restaurant', admin_restaurants_path %> |
     <%= link_to 'Categories', admin_categories_path %>
     <p></p>
+    <div class="form-inline" >
+      <%= form_for [:admin, @category] do |f| %>
+        <div class="form-group">
+          <%= f.text_field :name, placeholder: "Category Name",  class: "form-control" %>
+        </div>
+        <%= f.submit class: "btn btn-primary" %>
+        <% if @category.errors.any? %>
+          <%= @category.errors.full_messages.to_sentence %>
+        <% end %>
+      <% end %>
+    </div>
+    <p></p>
   </div>
 
   <div class="row">
