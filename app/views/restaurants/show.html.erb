@@ -6,7 +6,11 @@
     </div>
 
     <div class="col-md-4">
-      <%= image_tag @restaurant.image, class: "img-responsive center-block" %>
+      <% if @restaurant.image? %>
+        <%= image_tag @restaurant.image, class: "img-responsive center-block" %>
+      <% else %>
+        <%= image_tag "https://visualhunt.com/photos/l/7/lemons-fruitful-yellowed.jpg", class: "img-responsive center-block" %>       
+      <% end %>
       <br>
       <div class="well">
         <ul class="list-unstyled">
@@ -24,5 +28,31 @@
 
     <hr>
 
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <!-- 顯示與餐廳相關的評論 -->
+    <% @restaurant.comments.each do |comment| %>
+    <div>
+      <h4><%= comment.user.email.split('@')[0] %></h4>
+      <p><%= simple_format comment.content %></p>
+      <p class="text-muted">
+        <em><%= "about " + time_ago_in_words(comment.created_at)+ " ago" %> </em>
+      </p>
+    </div>
+    <hr>
+    <% end %>
+    <!-- form for new comment -->
+   <%= form_for [@restaurant, @comment] do |f| %>
+    <div class="form-group">
+      <%= f.text_area :content, placeholder: "留個言吧", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.submit class: "btn btn-primary" %>
+      <%= f.button "Cancel", type: :reset, class: "btn btn-default" %>
+    </div>
+  <% end %>
   </div>
 </div>
