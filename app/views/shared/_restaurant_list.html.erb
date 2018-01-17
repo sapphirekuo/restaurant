@@ -1,0 +1,32 @@
+<!-- restaurants list，有多寫restaurant-item的class style -->
+<div class="restaurants clearfix">
+  <% @restaurants.each do |restaurant| %>
+
+    <div class="col-sm-6 col-md-4">
+      <div class="restaurant-item">
+        <div class="restaurant-item-img">
+          <% if restaurant.image? %>
+            <%= image_tag restaurant.image, class: "img-responsive center-block" %>
+          <% else %>
+            <img src="https://visualhunt.com/photos/l/7/lemons-fruitful-yellowed.jpg" alt="">
+          <% end %>
+        </div>
+
+        <div class="caption">
+          <h3><%= link_to restaurant.name, restaurant_path(restaurant) %></h3>
+          <p class="label label-default"><%= restaurant.category.name %></p>
+          <p><%= truncate(restaurant.description, length: 70) %></p>
+        </div>
+
+        
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
+   
+<!-- 有generate kaminari paginate bootstrap style -->
+<div class="text-center">
+  <%= paginate @restaurants %>
+</div>
