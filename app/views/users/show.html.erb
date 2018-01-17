@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <div class="col-md-4">
+        <% if @user.avatar? %>
+          <%= image_tag @user.avatar, class: "img-responsive center-block" %>
+        <% else %>
+          <%= image_tag "https://visualhunt.com/photos/l/7/chair-pet-cat.jpg", class: "img-responsive center-block" %>
+        <% end %>
+      </div>
+
+
+      <div class="col-md-8">
+        <h2><%= @user.name %></h2>
+        <h5><%= @user.email %></h5>
+        <%= simple_format @user.intro %>
+        <% if @user == current_user %>
+          <%= link_to 'Edit Profile', edit_user_path(@user), class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+
+
+    <div class="clearfix"></div>
+
+  </div>
+</div>
