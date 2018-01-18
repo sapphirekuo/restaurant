@@ -8,6 +8,7 @@
 
 # Category
 Category.destroy_all
+Restaurant.destroy_all
 
 category_list =[
   { name: "中式料理" },
@@ -26,5 +27,6 @@ puts "Category created!"
 
 # Default admin
 
+User.destroy_all
 User.create(name: "123admin", email: "123@gmail.com", password: "123456", role: "admin", intro: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque ipsa esse repudiandae est blanditiis cum soluta dignissimos placeat.")
 puts "Default admin created!"
