@@ -18,7 +18,7 @@
 
 .restaurant-item img {
   max-height: 180px;
-  width: 100%;
+
 }
 
 .restaurant-item .caption {
@@ -32,4 +32,19 @@
 .nav-pills-center > li {
   float: none;
   display: inline-block;
+}
+
+.my-restaurant {
+  float: left;
+  padding-right: 20px;
+  padding-bottom: 10px;
+}
+
+.my-restaurant-img {
+  height: 60px;
+}
+
+.my-restaurant img {
+  height: 100%;
+
 }

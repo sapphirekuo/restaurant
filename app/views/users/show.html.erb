@@ -25,3 +25,32 @@
 
   </div>
 </div>
+
+<br />
+
+<!-- list for commented restaurants -->
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= @commented_restaurants.count %> 已評論餐廳</h3>
+    </div>
+
+    <div class="panel-body clearfix">
+      <% @commented_restaurants.each do |restaurant| %>
+      <%= link_to restaurant_path(restaurant) do %>
+      <div class="my-restaurant">
+        <div class="my-restaurant-img">
+          <% if restaurant.image? %>
+            <%= image_tag restaurant.image, class: "img-responsive img-rounded" %>
+          <% else %>
+            <%= image_tag "https://visualhunt.com/photos/l/7/lemons-fruitful-yellowed.jpg", class: "img-responsive img-rounded" %>
+          <% end %>
+        </div>
+
+        <h5><%= restaurant.name %></h5>   
+      </div>
+      <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

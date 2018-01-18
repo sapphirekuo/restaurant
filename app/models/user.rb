@@ -7,6 +7,8 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
 
   has_many :comments, dependent: :destroy
+  has_many :restaurants, through: :comments, dependent: :destroy
+
 
   # if name is the required field
   #   validates_presence_of :name
