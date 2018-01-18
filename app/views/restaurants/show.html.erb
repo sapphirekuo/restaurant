@@ -22,42 +22,48 @@
     </div>
     <div class="col-md-8">
       <%= simple_format @restaurant.description %>
+      <br>
+      <%= link_to 'Dashboard', dashboard_restaurant_path(@restaurant), class: "btn btn-primary" %>
     </div>
-
+    <br>
+    <br>
     <div class="clearfix"></div>
 
-    <hr>
 
   </div>
 </div>
 
 <div class="container">
   <div class="row">
+    <div class="col-md-12">
     <!-- 顯示與餐廳相關的評論 -->
-    <% @restaurant.comments.each do |comment| %>
-    <div>
-      <h4><%= comment.user.name %></h4>
-      <!-- comment.user.email.split('@').first -->
-      <p><%= simple_format comment.content %></p>
-      <p class="text-muted">
-        <em><%= "about " + time_ago_in_words(comment.created_at)+ " ago" %> </em>
-        <% if current_user.admin? %>
-          <%= " - " %>
-          <%= link_to "Delete", restaurant_comment_path(@restaurant, comment), method: :delete %>
-        <% end %>
-      </p>
+      <h3>評論</h3>
+      <hr>
+      <% @restaurant.comments.each do |comment| %>
+      <div>
+        <h4><%= comment.user.name %></h4>
+        <!-- comment.user.email.split('@').first -->
+        <p><%= simple_format comment.content %></p>
+        <p class="text-muted">
+          <em><%= "about " + time_ago_in_words(comment.created_at)+ " ago" %> </em>
+          <% if current_user.admin? %>
+            <%= " - " %>
+            <%= link_to "Delete", restaurant_comment_path(@restaurant, comment), method: :delete %>
+          <% end %>
+        </p>
+      </div>
+      <hr>
+      <% end %>
+      <!-- form for new comment -->
+     <%= form_for [@restaurant, @comment] do |f| %>
+      <div class="form-group">
+        <%= f.text_area :content, placeholder: "留個言吧", class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.submit class: "btn btn-primary" %>
+        <%= f.button "Cancel", type: :reset, class: "btn btn-default" %>
+      </div>
+      <% end %>
     </div>
-    <hr>
-    <% end %>
-    <!-- form for new comment -->
-   <%= form_for [@restaurant, @comment] do |f| %>
-    <div class="form-group">
-      <%= f.text_area :content, placeholder: "留個言吧", class: "form-control" %>
-    </div>
-    <div class="form-group">
-      <%= f.submit class: "btn btn-primary" %>
-      <%= f.button "Cancel", type: :reset, class: "btn btn-default" %>
-    </div>
-  <% end %>
   </div>
 </div>
