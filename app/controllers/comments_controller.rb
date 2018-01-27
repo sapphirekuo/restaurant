@@ -14,6 +14,12 @@ def destroy
 
     if current_user.admin?
       @comment.destroy
+      if @comment.errors 
+        flash[:alert] = @comment.errors.full_messages.to_sentence
+      else
+        flash[:notice] = "comment was sucessfully deleted"
+      end
+
       redirect_to restaurant_path(@restaurant)
     end
   end
