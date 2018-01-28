@@ -6,9 +6,12 @@ Rails.application.routes.draw do
   resources :restaurants, only: [:index, :show] do
     resources :comments, only: [:create, :destroy]
 
-    # 瀏覽所有餐廳的最新動態
+    
     collection do
+      # 瀏覽所有餐廳的最新動態
       get :feeds
+      # 瀏覽前十名收賶餐廳
+      get :ranking
     end
 
     member do
