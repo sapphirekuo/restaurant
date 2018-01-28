@@ -14,6 +14,9 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorited_restaurants, through: :favorites, source: :restaurant
 
+  # 「使用者Like很多餐廳」的多對多關聯
+  has_many :likes, dependent: :destroy
+  has_many :liked_restaurants, through: :likes, source: :restaurant
 
   # if name is the required field
   #   validates_presence_of :name

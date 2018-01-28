@@ -17,6 +17,9 @@ Rails.application.routes.draw do
       # user favorite功能
       post :favorite
       post :unfavorite
+      # user like功能
+      post :like
+      post :unlike
     end
     
   end
