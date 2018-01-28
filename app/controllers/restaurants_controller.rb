@@ -35,5 +35,23 @@ class RestaurantsController < ApplicationController
     favorites.destroy_all
     redirect_back(fallback_location: root_path)
   end
+
+# POST /restaurants/:id/like
+  def like
+    @restaurant = Restaurant.find(params[:id])
+    @restaurant.likes.create!(user: current_user)
+    redirect_back(fallback_location: root_path)  # 導回上一頁
+  end
+
+  # POST /restaurants/:id/unlike
+  def unlike
+    @restaurant = Restaurant.find(params[:id])
+    likes = Like.where(restaurant: @restaurant, user: current_user)
+    likes.destroy_all
+    redirect_back(fallback_location: root_path)
+  end
+
+
+
   
 end
