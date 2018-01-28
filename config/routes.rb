@@ -11,9 +11,12 @@ Rails.application.routes.draw do
       get :feeds
     end
 
-    # 瀏覽個別餐廳的 Dashboard
     member do
+      # 瀏覽個別餐廳的 Dashboard
       get :dashboard
+      # user favorite功能
+      post :favorite
+      post :unfavorite
     end
     
   end
