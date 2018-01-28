@@ -16,9 +16,8 @@
           <h3><%= link_to restaurant.name, restaurant_path(restaurant) %></h3>
           <p class="label label-default"><%= restaurant.category.name %></p>
           <p><%= truncate(restaurant.description, length: 60) %></p>
+          <p><%= render partial: "shared/favorite", locals: {restaurant: restaurant} %></p>
         </div>
-
-        
       </div>
     </div>
   <% end %>
