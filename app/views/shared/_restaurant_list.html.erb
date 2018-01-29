@@ -5,10 +5,12 @@
     <div class="col-sm-6 col-md-4">
       <div class="restaurant-item">
         <div class="restaurant-item-img">
-          <% if restaurant.image? %>
-            <%= image_tag restaurant.image, class: "img-responsive center-block" %>
-          <% else %>
-            <%= image_tag "https://visualhunt.com/photos/l/7/lemons-fruitful-yellowed.jpg", class: "img-responsive center-block" %>
+          <%= link_to restaurant_path(restaurant) do %>
+            <% if restaurant.image? %>
+              <%= image_tag restaurant.image, class: "img-responsive center-block" %>
+            <% else %>
+              <%= image_tag "https://visualhunt.com/photos/l/7/lemons-fruitful-yellowed.jpg", class: "img-responsive center-block" %>
+            <% end %>
           <% end %>
         </div>
 
