@@ -1,11 +1,38 @@
-<ul>
+<div class="container">
+  <div class="row">
+    <ul class="nav nav-tabs">
+      <li role="presentation"><%= link_to "全部餐廳", root_path %></li>
+      <li role="presentation"><%= link_to "最新動態", feeds_restaurants_path %></li>
+      <li role="presentation"><%= link_to "TOP10人氣餐廳", ranking_restaurants_path %></li>
+      <li role="presentation" class="active"><%= link_to "美食達人", users_path %></li>
+    </ul>
 
-  <% @users.each do |user| %>
+<br>
 
-  <li>
-    <%= user.name %>. 
-    <%= render partial: "shared/follow", locals: {user: user} %>
-  </li>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
 
-  <% end %>
-</ul>
+      <h1>美食達人</h1>
+      <hr>
+      <ul>
+
+        <% @users.each do |user| %>
+        <div class="col-md-3 col-sm-4 col-xs-6 text-center user-item">
+          <%= link_to user_path(user) do %>
+          <% if user.avatar? %>
+            <%= image_tag user.avatar, class: "img-responsive center-block" %>
+          <% else %>
+            <%= image_tag "https://visualhunt.com/photos/l/7/chair-pet-cat.jpg", class: "img-responsive center-block" %>
+          <% end %>
+          <h4><%= user.name %></h4>
+          <%= render partial: "shared/follow", locals: {user: user} %>
+          <% end %>
+        </div>
+
+        <% end %>
+      </ul>
+
+    </div>
+  </div>
+</div>

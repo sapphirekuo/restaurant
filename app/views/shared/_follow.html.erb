@@ -1,8 +1,8 @@
 <% if user != current_user %>
       <% if current_user.following?(user) %>
-        <%= link_to "Unfollow", followship_path(user), method: :delete %>. 
+        <%= link_to "Unfollow", followship_path(user), method: :delete, class: "btn btn-link" %>
       <% else %>     
-        <%= link_to "Follow", followships_path(following_id: user), method: :post %>. 
+        <%= link_to "Follow", followships_path(following_id: user), method: :post, class: "btn btn-default" %>
         <!-- 也可以寫成 following_id: user.id，不過只要寫入物件，Rails 會自動抓取主鍵的 value -->
       <% end %>
     <% end %>
