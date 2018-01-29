@@ -19,7 +19,7 @@ class User < ApplicationRecord
   has_many :liked_restaurants, through: :likes, source: :restaurant
 
   # 「使用者追蹤美食達人」的多對多關聯
-  has_many :followships, dependent :destroy
+  has_many :followships, dependent: :destroy
   has_many :followings, through: :followships
 
   # if name is the required field
