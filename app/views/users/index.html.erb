@@ -4,9 +4,7 @@
 
   <li>
     <%= user.name %>. 
-    <%= link_to "Follow", followships_path(following_id: user), method: :post %>. 
-    <!-- 也可以寫成 following_id: user.id，不過只要寫入物件，Rails 會自動抓取主鍵的 value -->
-    <%= link_to "Unfollow", followship_path(user), method: :delete %>. 
+    <%= render partial: "shared/follow", locals: {user: user} %>
   </li>
 
   <% end %>
