@@ -13,6 +13,13 @@
       <div class="col-md-8">
         <h2><%= @user.name %></h2>
         <h5><%= @user.email %></h5>
+        <!-- inline & unstyled 的 list -->
+        <ul class="list-unstyled list-inline">
+          <li><a href="#user_commented_restaurants"><strong><%= @commented_restaurants.count %></strong> 已評論餐廳</a></li>
+          <li><a href="#user_favorited_restaurants"><strong><%= @favorited_restaurants.count %></strong> 收藏的餐廳</a></li>
+          <li><a href="#user_followings"><strong><%= @followings.count %></strong> followings</a></li>
+          <li><a href="#user_followers"><strong><%= @followers.count %></strong> followers</a></li>
+        </ul>
         <%= simple_format @user.intro %>
         <% if @user == current_user %>
           <%= link_to 'Edit Profile', edit_user_path(@user), class: "btn btn-primary" %>
@@ -28,29 +35,103 @@
 
 <br />
 
-<!-- list for commented restaurants -->
+<!-- @followings -->
 <div class="container">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title"><%= @commented_restaurants.count %> 已評論餐廳</h3>
+  <div class="col-md-4">
+    <div class="panel panel-default" id="user_followings">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= @followings.count %> followings</h3>
+      </div>
+    
+      <ul class="list-group">
+        <% @followings.each do |following| %>
+        <li class="list-group-item">  
+          <%= link_to user_path(following) do %> 
+            <% if following.avatar? %>
+              <%= image_tag following.avatar.image, height: 30, width: 30, class: "img-circle" %>
+            <% else %>
+              <%= image_tag "https://visualhunt.com/photos/l/7/chair-pet-cat.jpg", height: 30, width: 30, class: "img-circle" %>
+            <% end %>       
+            <%= following.name %>
+          <% end %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+    
+      <!-- @followers -->
+    <div class="panel panel-default" id="user_followers">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= @followers.count %> followers</h3>
+      </div>
+    
+      <ul class="list-group">
+        <% @followers.each do |follower| %>
+        <li class="list-group-item">  
+          <%= link_to user_path(follower) do %> 
+            <% if follower.avatar? %>
+              <%= image_tag follower.avatar.image, height: 30, width: 30, class: "img-circle" %>
+            <% else %>
+              <%= image_tag "https://visualhunt.com/photos/l/7/chair-pet-cat.jpg", height: 30, width: 30, class: "img-circle" %>
+            <% end %>       
+            <%= follower.name %>
+          <% end %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+<!-- list for commented restaurants -->
+
+  <div class="col-md-8">
+    <div class="panel panel-default" id="user_commented_restaurants">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= @commented_restaurants.count %> 已評論餐廳</h3>
+      </div>
+
+      <div class="panel-body clearfix">
+        <% @commented_restaurants.each do |restaurant| %>
+          <%= link_to restaurant_path(restaurant) do %>
+            <div class="my-restaurant"> 
+              <div class="my-restaurant-img">
+                <% if restaurant.image? %>
+                  <%= image_tag restaurant.image, class: "img-responsive img-rounded" %>
+                <% else %>
+                  <%= image_tag "https://visualhunt.com/photos/l/7/lemons-fruitful-yellowed.jpg", class: "img-responsive img-rounded" %>
+                <% end %>
+              </div>
+            <h5><%= restaurant.name %></h5>   
+          </div>
+          <% end %>
+        <% end %>
+      </div>
     </div>
 
-    <div class="panel-body clearfix">
-      <% @commented_restaurants.each do |restaurant| %>
-      <%= link_to restaurant_path(restaurant) do %>
-      <div class="my-restaurant">
-        <div class="my-restaurant-img">
-          <% if restaurant.image? %>
-            <%= image_tag restaurant.image, class: "img-responsive img-rounded" %>
-          <% else %>
-            <%= image_tag "https://visualhunt.com/photos/l/7/lemons-fruitful-yellowed.jpg", class: "img-responsive img-rounded" %>
-          <% end %>
-        </div>
-
-        <h5><%= restaurant.name %></h5>   
+  <!-- @favorited_restaurants -->
+    <div class="panel panel-default" id="user_favorited_restaurants">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= @favorited_restaurants .count %> 收藏的餐廳</h3>
       </div>
-      <% end %>
-      <% end %>
+
+      <div class="panel-body clearfix">
+        <% @favorited_restaurants .each do |restaurant| %>
+          <%= link_to restaurant_path(restaurant) do %>
+            <div class="my-restaurant">
+              <div class="my-restaurant-img">
+                <% if restaurant.image? %>
+                  <%= image_tag restaurant.image, class: "img-responsive img-rounded" %>
+                <% else %>
+                  <%= image_tag "https://visualhunt.com/photos/l/7/lemons-fruitful-yellowed.jpg", class: "img-responsive img-rounded" %>
+                <% end %>
+              </div>
+
+              <h5><%= restaurant.name %></h5>   
+            </div>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
+
