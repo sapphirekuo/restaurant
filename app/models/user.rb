@@ -26,6 +26,12 @@ class User < ApplicationRecord
   has_many :inverse_followships, class_name: "Followship", foreign_key: "following_id"
   has_many :followers, through: :inverse_followships, source: :user
 
+  #使用者的朋友： @user.friends
+  has_many :friendships, dependent: :destroy #, class_name: "friendship", primary_key: "id", foreign_key: "user_id"
+  has_many :friends, through: :friendships #, source: :friend
+
+
+
   # if name is the required field
   #   validates_presence_of :name
 
