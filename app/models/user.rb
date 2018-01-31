@@ -21,14 +21,19 @@ class User < ApplicationRecord
   # 「使用者追蹤美食達人」的多對多關聯
   has_many :followships, dependent: :destroy
   has_many :followings, through: :followships
-
-  #使用者的追蹤者：@user.followers
+  # 使用者的追蹤者：@user.followers
   has_many :inverse_followships, class_name: "Followship", foreign_key: "following_id"
   has_many :followers, through: :inverse_followships, source: :user
 
-  #使用者的朋友： @user.friends
+  # 使用者的朋友： @user.friends
   has_many :friendships, dependent: :destroy #, class_name: "friendship", primary_key: "id", foreign_key: "user_id"
   has_many :friends, through: :friendships #, source: :friend
+  # 已加使用者為好友的人 @user.friendlys
+  has_many :inverse_friends, class_name: "Friendship", foreign_key: "friend_id"
+  has_many :friendlys, through: :inverse_friends, source: :user
+
+  
+
 
 
 
