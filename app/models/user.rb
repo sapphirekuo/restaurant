@@ -32,10 +32,9 @@ class User < ApplicationRecord
   has_many :inverse_friends, class_name: "Friendship", foreign_key: "friend_id"
   has_many :friendlys, through: :inverse_friends, source: :user
 
-  
-
-
-
+  def all_friends
+    friends = (self.friends + self.friendlys).uniq
+  end
 
   # if name is the required field
   #   validates_presence_of :name
@@ -60,5 +59,9 @@ class User < ApplicationRecord
 
   def friend?(user)
     self.friends.include?(user)
+  end
+
+  def friendlys?(user)
+    self.friendlys.include?(user)
   end
 end
